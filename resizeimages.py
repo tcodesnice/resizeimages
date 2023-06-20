@@ -44,3 +44,5 @@ target_height = 459
 
 # Call the function to perform cropping and resizing
 crop_and_resize_image(input_image_path, output_image_path, target_width, target_height)
+
+#add more to above function
