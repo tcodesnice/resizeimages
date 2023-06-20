@@ -2,7 +2,10 @@
 #add function that resizes to 320x320
 #add an option to resize the photo to 688x459, 320x320 or both
 
-#new code for testing
+## updated as of 6/20 342pm
+##code intakes file path and outputs two photos, 320x320 and 688x459
+##BUT the square photo is coming out no nicely cropped and is pixelated 
+
 
 from PIL import Image
 
@@ -38,13 +41,18 @@ def resize_image(input_image_path, output_image_path, target_width, target_heigh
     canvas.save(output_image_path)
 
 # Provide the input and output image paths
-input_image_path = '/Users/tomascontreras/Desktop/AdobeStock_284400685.jpeg'
-output_image_path = '/Users/tomascontreras/Desktop/output.jpg'
+input_image_path = input('Enter the file path: ')
+output_image_path = '/Users/tomascontreras/Desktop/688output.jpg'
+output_image_pathsquare = '/Users/tomascontreras/Desktop/320output.jpg'
+
 
 # Set the target dimensions for resizing
-target_width = 688
-target_height = 459
+notsquare_target_width = 688
+notsquare_target_height = 459
+
+square_target_width = 320
+square_target_height = 320
 
 # Call the function to resize the image
-resize_image(input_image_path, output_image_path, target_width, target_height)
-
+resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+resize_image(input_image_path, output_image_pathsquare, square_target_width, square_target_height)
