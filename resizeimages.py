@@ -2,47 +2,48 @@
 #add function that resizes to 320x320
 #add an option to resize the photo to 688x459, 320x320 or both
 
-##this program works but it produces a super zoomed in image
+#new code for testing
 
 from PIL import Image
 
-def crop_and_resize_image(input_image_path, output_image_path, target_width, target_height):
+def resize_image(input_image_path, output_image_path, target_width, target_height):
     # Open the input image
     image = Image.open(input_image_path)
 
     # Calculate the aspect ratio of the input image
     aspect_ratio = image.width / image.height
 
-    # Calculate the proportional width and height for cropping
+    # Calculate the new dimensions while maintaining the aspect ratio
     if aspect_ratio > target_width / target_height:
-        crop_width = target_width
-        crop_height = int(target_width / aspect_ratio)
+        new_width = target_width
+        new_height = int(target_width / aspect_ratio)
     else:
-        crop_width = int(target_height * aspect_ratio)
-        crop_height = target_height
+        new_width = int(target_height * aspect_ratio)
+        new_height = target_height
 
-    # Calculate the coordinates for cropping
-    left = (image.width - crop_width) // 2
-    top = (image.height - crop_height) // 2
-    right = left + crop_width
-    bottom = top + crop_height
+    # Resize the image while maintaining the aspect ratio
+    resized_image = image.resize((new_width, new_height), Image.LANCZOS)
 
-    # Crop the image
-    cropped_image = image.crop((left, top, right, bottom))
+    # Create a new blank canvas of the target size
+    canvas = Image.new('RGB', (target_width, target_height), (255, 255, 255))
 
-    # Resize the cropped image using LANCZOS resampling
-    resized_image = cropped_image.resize((target_width, target_height), Image.LANCZOS)
+    # Calculate the center position to paste the resized image on the canvas
+    paste_x = (target_width - new_width) // 2
+    paste_y = (target_height - new_height) // 2
 
-    # Save the resized image
-    resized_image.save(output_image_path)
+    # Paste the resized image onto the canvas
+    canvas.paste(resized_image, (paste_x, paste_y))
+
+    # Save the final resized image
+    canvas.save(output_image_path)
 
 # Provide the input and output image paths
 input_image_path = '/Users/tomascontreras/Desktop/AdobeStock_284400685.jpeg'
-output_image_path = '/Users/tomascontreras/Desktop/output.jpeg'
+output_image_path = '/Users/tomascontreras/Desktop/output.jpg'
 
-# Set the target dimensions for cropping and resizing
+# Set the target dimensions for resizing
 target_width = 688
 target_height = 459
 
-# Call the function to perform cropping and resizing
-crop_and_resize_image(input_image_path, output_image_path, target_width, target_height)
+# Call the function to resize the image
+resize_image(input_image_path, output_image_path, target_width, target_height)
