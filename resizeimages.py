@@ -2,6 +2,8 @@
 #add function that resizes to 320x320
 #add an option to resize the photo to 688x459, 320x320 or both
 
+##this program works but it produces a super zoomed in image
+
 from PIL import Image
 
 def crop_and_resize_image(input_image_path, output_image_path, target_width, target_height):
@@ -28,15 +30,15 @@ def crop_and_resize_image(input_image_path, output_image_path, target_width, tar
     # Crop the image
     cropped_image = image.crop((left, top, right, bottom))
 
-    # Resize the cropped image
-    resized_image = cropped_image.resize((target_width, target_height), Image.ANTIALIAS)
+    # Resize the cropped image using LANCZOS resampling
+    resized_image = cropped_image.resize((target_width, target_height), Image.LANCZOS)
 
     # Save the resized image
     resized_image.save(output_image_path)
 
 # Provide the input and output image paths
-input_image_path = 'input.jpg'
-output_image_path = 'output.jpg'
+input_image_path = '/Users/tomascontreras/Desktop/AdobeStock_284400685.jpeg'
+output_image_path = '/Users/tomascontreras/Desktop/output.jpeg'
 
 # Set the target dimensions for cropping and resizing
 target_width = 688
@@ -44,5 +46,3 @@ target_height = 459
 
 # Call the function to perform cropping and resizing
 crop_and_resize_image(input_image_path, output_image_path, target_width, target_height)
-
-#add more to above function
