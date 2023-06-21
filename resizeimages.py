@@ -73,14 +73,10 @@ def square_resize_image(input_image_path, output_image_path, target_size):
 input_image_path = input('Enter the file path: ')
 output_image_pathsquare = '/Users/tomascontreras/Desktop/320output.jpg'
 output_image_path = '/Users/tomascontreras/Desktop/688output.jpg'
-
+input_size = input('do you want this image to be 320x320, 688x459 or both?: ')
 
 # Set the target size for resizing (in pixels)
 target_size = 320
-
-# Call the function to resize the image 320x320
-square_resize_image(input_image_path, output_image_pathsquare, target_size)
-
 
 # Set the target dimensions for resizing
 notsquare_target_width = 688
@@ -88,4 +84,11 @@ notsquare_target_height = 459
 
 
 # Call the function to resize the image 688x320
-resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+if input_size == '688':
+    resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+# Call the function to resize the image 320x320
+elif input_size == 320:
+    square_resize_image(input_image_path, output_image_pathsquare, target_size)
+else:
+    resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+    square_resize_image(input_image_path, output_image_pathsquare, target_size)
