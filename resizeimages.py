@@ -89,7 +89,7 @@ notsquare_target_height = 459
 if input_size == '688':
     resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
 # Call the function to resize the image 320x320
-elif input_size == 320:
+elif input_size == '320':
     square_resize_image(input_image_path, output_image_pathsquare, target_size)
 else:
     resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
