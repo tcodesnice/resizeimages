@@ -28,17 +28,19 @@ def resize_image(input_image_path, output_image_path, target_width, target_heigh
     resized_image = image.resize((new_width, new_height), Image.LANCZOS)
 
     # Create a new blank canvas of the target size
-    canvas = Image.new('RGB', (target_width, target_height), (255, 255, 255))
+    canvas = Image.new('RGB', (new_width, new_height), (255, 255, 255))
 
     # Calculate the center position to paste the resized image on the canvas
-    paste_x = (target_width - new_width) // 2
-    paste_y = (target_height - new_height) // 2
+    paste_x = (new_width - resized_image.width) // 2
+    paste_y = (new_height - resized_image.height) // 2
 
     # Paste the resized image onto the canvas
     canvas.paste(resized_image, (paste_x, paste_y))
 
+    final_image = canvas.resize((target_width, target_height), Image.LANCZOS)
+
     # Save the final resized image
-    canvas.save(output_image_path)
+    final_image.save(output_image_path)
 
 
 def square_resize_image(input_image_path, output_image_path, target_size):
