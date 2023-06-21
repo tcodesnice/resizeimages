@@ -43,30 +43,31 @@ def resize_image(input_image_path, output_image_path, target_width, target_heigh
 
 def square_resize_image(input_image_path, output_image_path, target_size):
     image = Image.open(input_image_path)
-    aspect_ratio = image.width / image.height
+    width, height = image.size
+    
     # Calculate the new dimensions while maintaining the aspect ratio
-    if aspect_ratio > 1:
-        new_width = target_size
-        new_height = int(target_size / aspect_ratio)
+    if width > height:
+        new_width = height
+        new_height = height
     else:
-        new_width = int(target_size * aspect_ratio)
-        new_height = target_size
-
-    # Resize the image while maintaining the aspect ratio
-    resized_image = image.resize((new_width, new_height), Image.LANCZOS)
-
-    # Create a new blank square canvas of the target size
-    canvas = Image.new('RGB', (target_size, target_size), (255, 255, 255))
-
-    # Calculate the position to paste the resized image on the canvas
-    paste_x = (target_size - new_width) // 2
-    paste_y = (target_size - new_height) // 2
-
-    # Paste the resized image onto the canvas
-    canvas.paste(resized_image, (paste_x, paste_y))
-
+        new_width = width
+        new_height = width
+    
+    # Calculate the coordinates to crop the image
+    left = (width - new_width) // 2
+    top = (height - new_height) // 2
+    right = left + new_width
+    bottom = top + new_height
+    
+    # Crop the image to a square
+    cropped_image = image.crop((left, top, right, bottom))
+    
+    # Resize the cropped image to the target size
+    resized_image = cropped_image.resize((target_size, target_size), Image.LANCZOS)
+    
     # Save the final resized image
-    canvas.save(output_image_path)
+    resized_image.save(output_image_path)
+
 
 # Provide the input and output image paths
 input_image_path = input('Enter the file path: ')
