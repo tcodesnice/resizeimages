@@ -101,6 +101,8 @@ for filename in os.listdir(input_folder_path):
             resize_image(input_image_path, output_image_path_notsquare, notsquare_target_width, notsquare_target_height)
 
 
+#trying new shite
+
 
 ###old language below - just creates two new images based on file path. Redid code above to create a new folder with both or just one pixel density
 
