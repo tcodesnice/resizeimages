@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>401</width>
+    <height>495</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QComboBox" name="size_chooser">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>340</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>688x459</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>320x320</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>both</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="final_resize_button">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>400</y>
+      <width>100</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resize!</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="dragndropbox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>381</width>
+      <height>321</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>401</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionRefresh"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
