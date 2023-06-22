@@ -6,7 +6,7 @@
 ##code intakes file path and outputs two photos, 320x320 and 688x459
 ##BUT the square photo is coming out no nicely cropped and is pixelated 
 
-
+import os
 from PIL import Image
 
 def resize_image(input_image_path, output_image_path, target_width, target_height):
@@ -65,32 +65,51 @@ def square_resize_image(input_image_path, output_image_path, target_size):
     cropped_image = image.crop((left, top, right, bottom))
     
     # Resize the cropped image to the target size
-    resized_image = cropped_image.resize((target_size, target_size), Image.LANCZOS)
+    resized_image = cropped_image.resize((target_size, target_size), Image.BICUBIC) #Image.LANCZOS
     
     # Save the final resized image
     resized_image.save(output_image_path)
 
 
 # Provide the input and output image paths
-input_image_path = input('Enter the file path: ')
-output_image_pathsquare = '/Users/tomascontreras/Desktop/320output.jpg'
-output_image_path = '/Users/tomascontreras/Desktop/688output.jpg'
+input_folder_path = input('Enter the file path: ')
+output_folder_path = '/Users/tomascontreras/Desktop/resizedimages'
 input_size = input('do you want this image to be 320x320, 688x459 or both?: ')
 
 # Set the target size for resizing (in pixels)
 target_size = 320
-
-# Set the target dimensions for resizing
 notsquare_target_width = 688
 notsquare_target_height = 459
 
+# Create the output folder if it doesn't exist
+os.makedirs(output_folder_path, exist_ok=True)
 
-# Call the function to resize the image 688x320
-if input_size == '688':
-    resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
-# Call the function to resize the image 320x320
-elif input_size == '320':
-    square_resize_image(input_image_path, output_image_pathsquare, target_size)
-else:
-    resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
-    square_resize_image(input_image_path, output_image_pathsquare, target_size)
+for filename in os.listdir(input_folder_path):
+    if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'):  # Add more file extensions if needed
+        input_image_path = os.path.join(input_folder_path, filename)
+        
+        # Create the corresponding output file paths
+        output_image_path_square = os.path.join(output_folder_path, '320_' + os.path.basename(filename))
+        output_image_path_notsquare = os.path.join(output_folder_path, '688_' + os.path.basename(filename))
+
+        # Call the function to resize the image to the user-specified size
+        if input_size in ['320', 'both']:
+            square_resize_image(input_image_path, output_image_path_square, target_size)
+
+        # Call the function to resize the image 688x459 if desired
+        if input_size in ['688', 'both']:
+            resize_image(input_image_path, output_image_path_notsquare, notsquare_target_width, notsquare_target_height)
+
+
+
+###old language below - just creates two new images based on file path. Redid code above to create a new folder with both or just one pixel density
+
+# # Call the function to resize the image 688x320
+# if input_size == '688':
+#     resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+# # Call the function to resize the image 320x320
+# elif input_size == '320':
+#     square_resize_image(input_image_path, output_image_pathsquare, target_size)
+# else:
+#     resize_image(input_image_path, output_image_path, notsquare_target_width, notsquare_target_height)
+#     square_resize_image(input_image_path, output_image_pathsquare, target_size)
