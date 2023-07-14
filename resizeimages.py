@@ -1,10 +1,7 @@
-#make it so it takes a file path to the photo as an input
-#add function that resizes to 320x320
-#add an option to resize the photo to 688x459, 320x320 or both
+##6/22/23 1:19PM 
+##reverting back to this branch because sharpening fucked it up
+##version sharpening function is in Attempt2sharpening branch
 
-## updated as of 6/20 342pm
-##code intakes file path and outputs two photos, 320x320 and 688x459
-##BUT the square photo is coming out no nicely cropped and is pixelated 
 
 import os
 from PIL import Image
